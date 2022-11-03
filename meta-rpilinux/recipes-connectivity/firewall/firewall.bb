@@ -1,29 +1,24 @@
-SUMMARY = "Add firewall service"
-
+SUMMARY = "Add iptables rules"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
 
-SRC_URI += "file://firewall.service \
-            file://firewall-test.service \
-            file://firewall.sh"
+SRC_URI += "file://firewall.init \
+            file://firewall.rules"
+
+PR = "r0"
 
 S = "${WORKDIR}"
 
-inherit systemd
-
-SYSTEMD_PACKAGES="${PN}"
+inherit update-rc.d
+INITSCRIPT_NAME = "firewall"
+INITSCRIPT_PARAMS = "start 60 S ."
 
 do_install() {
-    install -d ${D}${sbindir}
-    install -m 0750 firewall.sh ${D}${sbindir}
-
-    install -d ${D}${systemd_system_unitdir}
-    install -m 0644 firewall.service ${D}${systemd_system_unitdir}
-    install -m 0644 firewall-test.service ${D}${systemd_system_unitdir}
+    install -d ${D}${sysconfdir}/init.d
+    install -m 0755 firewall.init ${D}${sysconfdir}/init.d/firewall
+    install -m 0744 firewall.rules ${D}${sysconfdir}
 }
 
-FILES:${PN} = "${sbindir} ${systemd_system_unitdir}"
+FILES_${PN} = "${sysconfdir}"
 
-RDEPENDS:${PN} = "iptables"
-
-SYSTEMD_SERVICE:${PN} = "firewall.service"
+RDEPENDS_${PN} = "iptables"

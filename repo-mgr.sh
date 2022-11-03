@@ -8,6 +8,7 @@ _usage() {
     echo "  Commands:"
     echo "      install - Install build dependencies"
     echo "      init - Initialize build repositories"
+    echo "      clean - Remove sstate cache and tmp directories"
     exit 1
 }
 
@@ -52,6 +53,13 @@ install() {
         xterm python3-subunit mesa-common-dev zstd liblz4-tool
 }
 
+clean() {
+    echo -e "Removing sstate cache, downloads and tmp directories\n"
+    sudo -rf ./build/sstate-cache/
+    sudo -rf ./build/downloads/
+    sudo -rf ./build/tmp/
+}
+
 init() {
     conf_file="default.conf"
     force=false
@@ -92,6 +100,10 @@ case $1 in
     init)
         shift
         init "$@"
+        ;;
+    clean)
+        shift
+        clean "$@"
         ;;
     install)
         shift
