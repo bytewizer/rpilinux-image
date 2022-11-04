@@ -6,55 +6,9 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda
 require recipes-core/images/core-image-minimal.bb
 
 #
-# Supported languages
-#
-IMAGE_LINGUAS = "en-us"
-
-#
-# Hardware features 
-#
-MACHINE_FEATURES += "wifi bluetooth"
-
-#
-# Software features shipped 
-#
-DISTRO_FEATURES:append = " wifi bluetooth"
-
-#
 # Extra image configuration defaults
 #
 EXTRA_IMAGE_FEATURES ?= "ssh-server-openssh"
-
-#
-# Enable u-boot kernel image
-#
-# RPI_USE_U_BOOT = "1"
-
-#
-# Enable systemd in configuration
-#
-INIT_MANAGER = "systemd"
-
-#
-# Enable UART console
-#
-ENABLE_UART = "1"
-
-#
-# Enable I2C interface
-#
-ENABLE_I2C = "1"
-KERNEL_MODULE_AUTOLOAD:rpi += "i2c-dev"
-
-#
-# Enable SPI interface
-#
-ENABLE_SPI_BUS = "1"
-
-#
-# Enable USB HOST interface
-#
-ENABLE_DWC2_HOST = "1"
 
 #
 # Additional installed packages
@@ -109,7 +63,7 @@ IMAGE_FSTYPES = "wic wic.zip"
 #
 # IMAGE_ROOTFS_SIZE = "319488" 
 # IMAGE_OVERHEAD_FACTOR = "1.1"
-IMAGE_ROOTFS_EXTRA_SPACE = "1024"
+# IMAGE_ROOTFS_EXTRA_SPACE = "1024"
 # IMAGE_ROOTFS_MAXSIZE = "372736"
 
 #IMAGE_ROOTFS_SIZE = "5120" 

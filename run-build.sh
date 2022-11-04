@@ -18,5 +18,5 @@ bitbake-layers add-layer ../poky/meta-openembedded/meta-multimedia
 bitbake-layers add-layer ../poky/meta-openembedded/meta-networking
 
 # Build
-bitbake --dry-run $IMAGE
-#bitbake $IMAGE
+#bitbake --dry-run $IMAGE
+bitbake $IMAGE
