@@ -5,17 +5,16 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda
 
 require recipes-core/images/core-image-minimal.bb
 
-#
 # Extra image configuration defaults
-#
 EXTRA_IMAGE_FEATURES ?= "ssh-server-openssh"
 
-#
+# Software features shipped 
+DISTRO_FEATURES:append = " wifi bluetooth"
+
 # Additional installed packages
-#
 CORE_OS = "\
 	kernel-modules \
-	linux-firmware-rpidistro-bcm43455 \
+	linux-firmware-bcm43430 \
 	bluez5 \
     openssh \ 
 	openssh-sftp-server \
@@ -53,9 +52,7 @@ IMAGE_INSTALL:append = " \
 	${EXTRA_TOOLS} \
 "
 
-#
 # Enable wic format for flashing to sdcard
-#
 IMAGE_FSTYPES = "wic wic.zip"
 
 #
@@ -68,9 +65,13 @@ IMAGE_FSTYPES = "wic wic.zip"
 
 #IMAGE_ROOTFS_SIZE = "5120" 
 
-#
+# Remove debugging tweaks. This allows the root user to be passwordless.
+# IMAGE_FEATURES:remove = " \
+#     debug-tweaks \
+# "
+
 # Set root password
-# using openssl passwd root
-# hashed password for 'root' is 'root'
-# INHERIT += "extrausers"
-#EXTRA_USERS_PARAMS = "usermod -p $1$w.Zx6Jam$HK20WaLI35IVYa/GicuV90 root;"
+# inherit extrausers
+# EXTRA_USERS_PARAMS = " \
+#     usermod -P root root; \
+# "
