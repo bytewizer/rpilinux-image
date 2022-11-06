@@ -4,7 +4,7 @@
 
 ```
 $ git clone https://github.com/bytewizer/reterminal-image.git
-$ cd yald-build
+$ cd reterminal-image
 $ ./repo-mgr.sh install
 $ ./repo-mgr.sh init
 $ ./run-build.sh
@@ -13,3 +13,4 @@ $ ./run-build.sh
 ### Supported machines
 
 - raspberrypi3-64
+- raspberrypi4-64

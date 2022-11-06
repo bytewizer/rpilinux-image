@@ -55,9 +55,9 @@ install() {
 
 clean() {
     echo -e "Removing sstate cache, downloads and tmp directories\n"
-    sudo -rf ./build/sstate-cache/
-    sudo -rf ./build/downloads/
-    sudo -rf ./build/tmp/
+    sudo rm -rf ./build/sstate-cache/
+    sudo rm -rf ./build/downloads/
+    sudo rm -rf ./build/tmp/
 }
 
 init() {

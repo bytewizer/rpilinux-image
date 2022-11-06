@@ -19,6 +19,8 @@ CORE_OS = "\
     openssh \ 
 	openssh-sftp-server \
 	openssl \
+	sudo \
+	iptables \
 "
 
 HARDWARE_TOOLS = "\
@@ -53,14 +55,14 @@ IMAGE_INSTALL:append = " \
 "
 
 # Enable wic format for flashing to sdcard
-IMAGE_FSTYPES = "wic wic.zip"
+IMAGE_FSTYPES = "wic"
 
 #
 # Set the size of root file system to 32GB
 #
 # IMAGE_ROOTFS_SIZE = "319488" 
 # IMAGE_OVERHEAD_FACTOR = "1.1"
-# IMAGE_ROOTFS_EXTRA_SPACE = "1024"
+IMAGE_ROOTFS_EXTRA_SPACE = "512"
 # IMAGE_ROOTFS_MAXSIZE = "372736"
 
 #IMAGE_ROOTFS_SIZE = "5120" 
@@ -72,6 +74,6 @@ IMAGE_FSTYPES = "wic wic.zip"
 
 # Set root password
 # inherit extrausers
-# EXTRA_USERS_PARAMS = " \
-#     usermod -P root root; \
-# "
+# ROOT_PASSWORD ??= "root"
+# ROOT_PASSWORD_ENCRYPTED ??= "$(openssl passwd -5 ${ROOT_PASSWORD})"
+# EXTRA_USERS_PARAMS += "usermod -p '${ROOT_PASSWORD_ENCRYPTED}' root;"
